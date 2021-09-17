@@ -1,0 +1,22 @@
+{%include "header.html" %}
+<body>
+  <h1>Make your list</h1>
+    <form action="{{url_for('add')}}" method="POST">
+        <input class="input" type="text" placeholder="Enter to do" name="task">
+        <button class="add" type="submit">➕</button>
+    </form>
+  <div class="contents">
+    {%for todo in todo_list %}
+        <p>{{todo.task}}</p>
+        {%if todo.complete == False %}
+                <span>Status: Not complete</span><br>
+        {%else%}
+            <span>Status: Complete</span><br>
+        {%endif%}
+    <a class="button" href="/done/{{todo.id}}">Done</a>
+    <a class="button" href="{{url_for('delete', id=todo.id)}}">Delete</a>
+    {%endfor%}
+  </div>
+{% include "footer.html" %}
+</body>
+</html>
